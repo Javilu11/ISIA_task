@@ -8,7 +8,7 @@ package matrices;
 
 import java.awt.Dimension;
 import java.util.Random;
-
+ 
 /**
  *
  * @author galvez
@@ -47,6 +47,23 @@ public class Matriz {
         } 
         return matrizResultante; 
     } 
+
+    public static Matriz MultiplicarDosMatrices(Matriz a, Matriz b) throws DimensionesIncompatibles { 
+            if(! a.getDimension().height.equals(b.getDimension().width)) throw new DimensionesIncompatibles("La producto de matrices requiere matrices de dimensiones (n,m) y (m,n)");        
+            int i, j, filasA, columnasA; 
+            filasA = a.getDimension().height; 
+            columnasA = b.getDimension().width; 
+            Matriz matrizResultante = new Matriz(filasA, columnasA, false);
+            for (j = 0; j < filasA; j++) { 
+                for (i = 0; i < columnasA; i++) { 
+                    for (k = 0; k < columnasA; i++) {
+                        matrizResultante.datos[i][j] += a.datos[i][k] * b.datos[k][j]; 
+                    }                
+                } 
+            } 
+            return matrizResultante; 
+        }    
+=======
     
     public static Matriz matrizInversa(Matriz a) throws DimensionesIncompatibles {
 		if(! a.getDimension().height.equals(a.getDimension().width)) throw new DimensionesIncompatibles("La matriz debe ser cuadrada");
@@ -135,6 +152,7 @@ public class Matriz {
 		}
 		return suma;
 	}
+
 
     @Override
     public String toString(){
